@@ -1,7 +1,5 @@
 # Mtrack: A Dynamic Memory Analysis Tool for C
 
-![Mtrack Banner](https://user-images.githubusercontent.com/12863942/148633337-399a747d-2463-4603-a533-96db2b1a03a1.png)
-
 Mtrack is a dynamic memory analysis tool for C. It helps you detect memory leaks, double frees, and other memory-related bugs. It works by "patching" your code at compile-time, intercepting calls to `malloc`, `free`, `calloc`, and `realloc` to monitor your program's memory usage.
 
 ## How It Works
