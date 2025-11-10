@@ -1,0 +1,22 @@
+CC := gcc
+STD := -std=c17
+SRC := src/
+INC := inc/
+LIB := lib/
+
+# répertoire où se trouve la lib. (truc.h|libtruc.so)
+LPATH := mtrack/
+# Nom de la bibliothèque à utiliser (ex: mtrack1, mtrack2, etc.)
+LIBNAME := mtrack1
+
+PFLAGS := -I$(INC) -I$(LPATH)$(INC)
+CFLAGS := -Wall -include $(LPATH)$(INC)$(LIBNAME).h
+LFLAGS := -lm -Wl,-rpath,$(LPATH)$(LIB) -L$(LPATH)$(LIB) -l$(LIBNAME)
+
+%.o : $(SRC)%.c
+	@echo "📝 Compiling $< (with $(LIBNAME).h)..."
+	$(CC) $^ -c $(STD) $(PFLAGS) $(CFLAGS) -o $@
+	
+% : %.o
+	@echo "🔗 Linking $< (with lib$(LIBNAME).so)..."
+	$(CC) $< $(LFLAGS) -o $@

@@ -1,0 +1,24 @@
+CC := gcc
+STD := -std=c17
+SRC := src/
+INC := inc/
+LIB := lib/
+
+PFLAGS := -I$(INC)
+CFLAGS := -fPIC
+LFLAGS := -shared -Wall
+
+mtrack1.o: $(SRC)mtrack1.c
+	@echo "📝 Compiling $<..."
+	$(CC) -c $(STD) $(PFLAGS) $(CFLAGS) $< -o $@
+
+
+mtrack1 : mtrack1.o
+	@echo "🔗 Creating $<..."
+	$(CC) $(LFLAGS) $< -o $(LIB)lib$@.so
+
+.PHONY: clean
+clean:
+	@echo "🧹 Cleaning generated files..."
+	rm -f mtrack1.o $(LIB)libmtrack1.so
+	@echo "✨ Cleanup completed!"
